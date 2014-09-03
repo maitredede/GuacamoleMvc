@@ -1,0 +1,505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{35943A0D-6442-4122-8F7B-649CDF1763D8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Guacamole.Mvc</RootNamespace>
+    <AssemblyName>Guacamole.Mvc</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GuacClient.cs" />
+    <Compile Include="GuacHub.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\Guacamole\client\admin.xhtml" />
+    <Content Include="Scripts\Guacamole\client\client.xhtml" />
+    <Content Include="Scripts\Guacamole\client\index.xhtml" />
+    <Content Include="Scripts\Guacamole\client\scripts\lib\blob\LICENSE.md" />
+    <Content Include="Scripts\Guacamole\client\scripts\lib\filesaver\LICENSE.md" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\net\sourceforge\guacamole\net\basic\BasicFileAuthenticationProvider%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\net\sourceforge\guacamole\net\basic\BasicFileAuthenticationProvider.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\AuthenticatingHttpServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\auth\Authorization%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\auth\Authorization%24Encoding.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\auth\Authorization.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\auth\UserMapping.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicGuacamoleTunnelServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicGuacamoleTunnelServlet%24IdentifierType.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicGuacamoleTunnelServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicLogin.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicLogout.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicTunnelRequestUtility%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicTunnelRequestUtility%242.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicTunnelRequestUtility%24IdentifierType.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\BasicTunnelRequestUtility.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\CaptureClipboard%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\CaptureClipboard.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\ClipboardState.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\ConnectionGroupUtility.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\Create.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\Delete.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\DummyConnectionGroup.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\List%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\List.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\Move.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connectiongroups\Update.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\ConnectionUtility.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\Create.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\Delete.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\DummyConnection.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\List%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\List.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\Move.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\connections\Update.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\permissions\List%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\permissions\List.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\protocols\List%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\protocols\List%242.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\protocols\List.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\users\Create.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\users\Delete.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\users\DummyUser.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\users\List.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\crud\users\Update.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\event\SessionListenerCollection.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\GuacamoleClassLoader%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\GuacamoleClassLoader%242.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\GuacamoleClassLoader.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\MonitoringGuacamoleReader.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\AuthenticationProviderProperty.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\BasicGuacamoleProperties%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\BasicGuacamoleProperties%242.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\BasicGuacamoleProperties%243.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\BasicGuacamoleProperties%244.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\BasicGuacamoleProperties.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\properties\EventListenersProperty.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\ProtocolInfo.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\ProtocolParameter%24Type.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\ProtocolParameter.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\ProtocolParameterOption.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\WebSocketSupportLoader%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\WebSocketSupportLoader.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\AuthenticatingWebSocketServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\AuthenticatingWebSocketServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\BasicGuacamoleWebSocketTunnelServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\BasicGuacamoleWebSocketTunnelServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\GuacamoleWebSocketTunnelServlet%241%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\GuacamoleWebSocketTunnelServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\jetty\GuacamoleWebSocketTunnelServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\AuthenticatingWebSocketServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\AuthenticatingWebSocketServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\BasicGuacamoleWebSocketTunnelServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\BasicGuacamoleWebSocketTunnelServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\GuacamoleWebSocketTunnelServlet%241%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\GuacamoleWebSocketTunnelServlet%241.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\websocket\tomcat\GuacamoleWebSocketTunnelServlet.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\DocumentHandler%24DocumentHandlerState.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\DocumentHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\protocol\OptionTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\protocol\ParamTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\protocol\ProtocolTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\TagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\user_mapping\AuthorizeTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\user_mapping\ConnectionTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\user_mapping\ParamTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\user_mapping\ProtocolTagHandler.class" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\org\glyptodon\guacamole\net\basic\xml\user_mapping\UserMappingTagHandler.class" />
+    <None Include="Properties\PublishProfiles\vmweb guactest.pubxml" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\all.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\all.min.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\ArrayBufferReader.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\ArrayBufferWriter.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\AudioChannel.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\BlobReader.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Client.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Display.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\InputStream.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\IntegerPool.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Keyboard.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Layer.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Mouse.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\OnScreenKeyboard.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\OutputStream.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Parser.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Status.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\StringReader.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\StringWriter.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Tunnel.js" />
+    <Content Include="Scripts\Guacamole\client\guacamole-common-js\modules\Version.js" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-back.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-close.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-config.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-delete.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-first-page.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-group-add.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-last-page.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-logout.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-monitor-add.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-next-page.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-prev-page.png" />
+    <Content Include="Scripts\Guacamole\client\images\action-icons\guac-user-add.png" />
+    <Content Include="Scripts\Guacamole\client\images\arrows\arrows-d.png" />
+    <Content Include="Scripts\Guacamole\client\images\arrows\arrows-l.png" />
+    <Content Include="Scripts\Guacamole\client\images\arrows\arrows-r.png" />
+    <Content Include="Scripts\Guacamole\client\images\arrows\arrows-u.png" />
+    <Content Include="Scripts\Guacamole\client\images\group-icons\guac-closed.png" />
+    <Content Include="Scripts\Guacamole\client\images\group-icons\guac-open.png" />
+    <Content Include="Scripts\Guacamole\client\images\guac-mono-192.png" />
+    <Content Include="Scripts\Guacamole\client\images\guacamole-logo-144.png" />
+    <Content Include="Scripts\Guacamole\client\images\guacamole-logo-24.png" />
+    <Content Include="Scripts\Guacamole\client\images\guacamole-logo-64.png" />
+    <Content Include="Scripts\Guacamole\client\images\mouse\blank.cur" />
+    <Content Include="Scripts\Guacamole\client\images\mouse\blank.gif" />
+    <Content Include="Scripts\Guacamole\client\images\mouse\dot.gif" />
+    <Content Include="Scripts\Guacamole\client\images\noguacamole-logo-24.png" />
+    <Content Include="Scripts\Guacamole\client\images\progress.png" />
+    <Content Include="Scripts\Guacamole\client\images\protocol-icons\guac-monitor.png" />
+    <Content Include="Scripts\Guacamole\client\images\protocol-icons\guac-plug.png" />
+    <Content Include="Scripts\Guacamole\client\images\protocol-icons\guac-text.png" />
+    <Content Include="Scripts\Guacamole\client\images\settings\tablet-keys.png" />
+    <Content Include="Scripts\Guacamole\client\images\settings\touchpad.png" />
+    <Content Include="Scripts\Guacamole\client\images\settings\touchscreen.png" />
+    <Content Include="Scripts\Guacamole\client\images\settings\zoom-in.png" />
+    <Content Include="Scripts\Guacamole\client\images\settings\zoom-out.png" />
+    <Content Include="Scripts\Guacamole\client\images\user-icons\guac-user.png" />
+    <Content Include="Scripts\Guacamole\client\layouts\en-us-qwerty-mobile.xml" />
+    <Content Include="Scripts\Guacamole\client\layouts\en-us-qwerty.xml" />
+    <Content Include="Scripts\Guacamole\client\scripts\admin-ui.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\client-ui.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\guac-ui.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\history.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\lib\blob\blob.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\lib\filesaver\filesaver.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\root-ui.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\service.js" />
+    <Content Include="Scripts\Guacamole\client\scripts\session.js" />
+    <Content Include="Scripts\Guacamole\client\styles\admin.css" />
+    <Content Include="Scripts\Guacamole\client\styles\animation.css" />
+    <Content Include="Scripts\Guacamole\client\styles\client.css" />
+    <Content Include="Scripts\Guacamole\client\styles\keyboard.css" />
+    <Content Include="Scripts\Guacamole\client\styles\login.css" />
+    <Content Include="Scripts\Guacamole\client\styles\ui.css" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\net\sourceforge\guacamole\net\protocols\rdp.xml" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\net\sourceforge\guacamole\net\protocols\ssh.xml" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\net\sourceforge\guacamole\net\protocols\telnet.xml" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\classes\net\sourceforge\guacamole\net\protocols\vnc.xml" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\lib\commons-logging-1.1.1.jar" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\lib\guacamole-common-0.9.2.jar" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\lib\guacamole-ext-0.9.2.jar" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\lib\slf4j-api-1.6.1.jar" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\lib\slf4j-jcl-1.6.1.jar" />
+    <Content Include="Scripts\Guacamole\client\WEB-INF\web.xml" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\all.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\all.min.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\ArrayBufferReader.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\ArrayBufferWriter.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\AudioChannel.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\BlobReader.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Client.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Display.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\InputStream.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\IntegerPool.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Keyboard.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Layer.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Mouse.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\OnScreenKeyboard.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\OutputStream.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Parser.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Status.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\StringReader.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\StringWriter.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Tunnel.js" />
+    <Content Include="Scripts\Guacamole\guacamole-common-js\modules\Version.js" />
+    <Content Include="Scripts\Guacamole\GuacR.Video.js" />
+    <Content Include="Scripts\Guacamole\GuacR.Audio.js" />
+    <Content Include="Scripts\Guacamole\GuacR.Tunnel.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.1.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.7.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Guacamole.cshtml" />
+    <Content Include="Views\Shared\_Root.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Guacamole\client\META-INF\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Guacamole.Lib\Guacamole.Lib.csproj">
+      <Project>{4697f4de-8de7-45a0-971c-c6bdf4a96a35}</Project>
+      <Name>Guacamole.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56459</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56459/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,351 @@
+﻿@{
+    this.Layout = "~/Views/Shared/_Root.cshtml";
+    ViewBag.Title = "Guacamole";
+}
+
+@*@Styles.Render("~/Content/guac-client")*@
+<button class="guac-start" data-id="42">RDP</button>
+<button class="guac-start" data-id="33">SSH</button>
+<h2 id="name"></h2>
+<div id="screen"></div>
+
+
+@section scripts{
+    <script src="~/Scripts/Guacamole/guacamole-common-js/all.min.js"></script>
+
+    <script src="~/Scripts/Guacamole/GuacR.Audio.js"></script>
+    <script src="~/Scripts/Guacamole/GuacR.Video.js"></script>
+    <script src="~/Scripts/Guacamole/GuacR.Tunnel.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var tunnel = new GuacR.SignalRTunnel();
+            tunnel.onerror = function (status) {
+                console.log("tunnel.onerror", status);
+            }
+            tunnel.onstatechange = function (state) {
+                console.log("tunnel.onstatechange", status);
+            }
+            var guac = new Guacamole.Client(tunnel);
+            guac.onstatechange = function (clientState) {
+                console.log("guac.onstatechange", clientState);
+            }
+            guac.onname = function (name) {
+                console.log("guac.onname", name);
+                $("#name").text(name);
+            };
+
+            guac.getDisplay().onresize = function (width, height) {
+                console.log("onresize", width, height);
+                $("#screen").width(width).height(height);
+            };
+            guac.onerror = function (status) {
+
+                // Disconnect, if connected
+                guac.disconnect();
+
+                // Display error message
+                //var message = GuacUI.Client.client_errors[status.code] || GuacUI.Client.client_errors.DEFAULT;
+                //GuacUI.Client.showError("Connection Error", message,
+                //    GuacUI.Client.client_auto_reconnect[status.code] && GuacUI.Client.RECONNECT_PERIOD);
+                console.log("guac.onerror", status);
+            };
+            // Server copy handler
+            guac.onclipboard = function (stream, mimetype) {
+                console.log("guac.onclipboard", mimetype);
+                stream.sendAck("Clipboard not supported", Guacamole.Status.Code.UNSUPPORTED);
+                //// Only text/plain is supported for now
+                //if (mimetype !== "text/plain") {
+                //    stream.sendAck("Only text/plain supported", Guacamole.Status.Code.UNSUPPORTED);
+                //    return;
+                //}
+
+                //var reader = new Guacamole.StringReader(stream);
+                //var data = "";
+
+                //// Append any received data to buffer
+                //reader.ontext = function clipboard_text_received(text) {
+                //    data += text;
+                //    stream.sendAck("Received", Guacamole.Status.Code.SUCCESS);
+                //};
+
+                //// Set contents when done
+                //reader.onend = function clipboard_text_end() {
+                //    GuacUI.Client.remote_clipboard = data;
+                //    GuacamoleSessionStorage.setItem("clipboard", data);
+                //};
+
+            };
+            guac.onfile = function (stream, mimetype, filename) {
+                console.log("guac.onfile", mimetype, filename);
+                stream.sendAck("File not supported", Guacamole.Status.Code.UNSUPPORTED);
+
+                //var download = new GuacUI.Download(filename);
+                //download.updateProgress(GuacUI.Client.getSizeString(0));
+
+                //var blob_reader = new Guacamole.BlobReader(stream, mimetype);
+
+                //GuacUI.Client.notification_area.appendChild(download.getElement());
+
+                //// Update progress as data is received
+                //blob_reader.onprogress = function () {
+                //    download.updateProgress(GuacUI.Client.getSizeString(blob_reader.getLength()));
+                //    stream.sendAck("Received", 0x0000);
+                //};
+
+                //// When complete, prompt for download
+                //blob_reader.onend = function () {
+
+                //    download.ondownload = function () {
+                //        saveAs(blob_reader.getBlob(), filename);
+                //    };
+
+                //    download.complete();
+
+                //};
+
+                //// When close clicked, remove from notification area
+                //download.onclose = function () {
+                //    GuacUI.Client.notification_area.removeChild(download.getElement());
+                //};
+
+                //stream.sendAck("Ready", 0x0000);
+
+            };
+
+            var guac_display = guac.getDisplay().getElement();
+            // Do nothing when the display element is clicked on.
+            guac_display.onclick = function (e) {
+                e.preventDefault();
+                return false;
+            };
+
+            // Mouse
+            var mouse = new Guacamole.Mouse(guac_display);
+            mouse.onmousedown = mouse.onmouseup = mouse.onmousemove = function (mouseState) {
+
+                // Scale event by current scale
+                var scaledState = new Guacamole.Mouse.State(
+                        mouseState.x / guac.getDisplay().getScale(),
+                        mouseState.y / guac.getDisplay().getScale(),
+                        mouseState.left,
+                        mouseState.middle,
+                        mouseState.right,
+                        mouseState.up,
+                        mouseState.down);
+
+                // Send mouse event
+                guac.sendMouseState(scaledState);
+
+            };
+
+            guac.getDisplay().getElement().className = "software-cursor";
+            var display = document.getElementById("screen");
+            display.appendChild(guac.getDisplay().getElement());
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            // One time init
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            /**
+     * Keys which should be allowed through to the client when in text input
+     * mode, providing corresponding key events are received. Keys in this
+     * set will be allowed through to the server.
+     */
+            var IME_ALLOWED_KEYS = {
+                0xFF08: true, /* Backspace */
+                0xFF09: true, /* Tab */
+                0xFF0D: true, /* Enter */
+                0xFF1B: true, /* Escape */
+                0xFF50: true, /* Home */
+                0xFF51: true, /* Left */
+                0xFF52: true, /* Up */
+                0xFF53: true, /* Right */
+                0xFF54: true, /* Down */
+                0xFF57: true, /* End */
+                0xFF64: true, /* Insert */
+                0xFFBE: true, /* F1 */
+                0xFFBF: true, /* F2 */
+                0xFFC0: true, /* F3 */
+                0xFFC1: true, /* F4 */
+                0xFFC2: true, /* F5 */
+                0xFFC3: true, /* F6 */
+                0xFFC4: true, /* F7 */
+                0xFFC5: true, /* F8 */
+                0xFFC6: true, /* F9 */
+                0xFFC7: true, /* F10 */
+                0xFFC8: true, /* F11 */
+                0xFFC9: true, /* F12 */
+                0xFFE1: true, /* Left shift */
+                0xFFE2: true, /* Right shift */
+                0xFFFF: true  /* Delete */
+            };
+
+            /*
+             * Route document-level keyboard events to the client.
+             */
+
+            var keyboard = new Guacamole.Keyboard(document);
+            var show_keyboard_gesture_possible = true;
+
+            function __send_key(pressed, keysym) {
+
+                //// Do not send key if menu shown
+                //if (GuacUI.Client.isMenuShown())
+                //    return true;
+
+                //// Allow all but specific keys through to browser when in IME mode
+                //if (GuacUI.Client.text_input.enabled && !IME_ALLOWED_KEYS[keysym])
+                //    return true;
+
+                //GuacUI.Client.attachedClient.sendKeyEvent(pressed, keysym);
+                guac.sendKeyEvent(pressed, keysym);
+                return false;
+
+            }
+
+            keyboard.onkeydown = function (keysym) {
+
+                //// Only handle key events if client is attached
+                //var guac = GuacUI.Client.attachedClient;
+                if (!guac) return true;
+
+                // Handle Ctrl-shortcuts specifically
+                if (keyboard.modifiers.ctrl && !keyboard.modifiers.alt && !keyboard.modifiers.shift) {
+
+                    // Allow event through if Ctrl+C or Ctrl+X
+                    if (keyboard.pressed[0x63] || keyboard.pressed[0x78]) {
+                        __send_key(1, keysym);
+                        return true;
+                    }
+
+                    // If Ctrl+V, wait until after paste event (next event loop)
+                    if (keyboard.pressed[0x76]) {
+                        window.setTimeout(function after_paste() {
+                            __send_key(1, keysym);
+                        }, 10);
+                        return true;
+                    }
+
+                }
+
+                // If key is NOT one of the expected keys, gesture not possible
+                if (keysym !== 0xFFE3 && keysym !== 0xFFE9 && keysym !== 0xFFE1)
+                    show_keyboard_gesture_possible = false;
+
+                // Send key event
+                return __send_key(1, keysym);
+
+            };
+
+            keyboard.onkeyup = function (keysym) {
+
+                //// Only handle key events if client is attached
+                //var guac = GuacUI.Client.attachedClient;
+                if (!guac) return true;
+
+                // If lifting up on shift, toggle menu visibility if rest of gesture
+                // conditions satisfied
+                if (show_keyboard_gesture_possible && keysym === 0xFFE1
+                    && keyboard.pressed[0xFFE3] && keyboard.pressed[0xFFE9]) {
+                    __send_key(0, 0xFFE1);
+                    __send_key(0, 0xFFE9);
+                    __send_key(0, 0xFFE3);
+                    GuacUI.Client.showMenu(!GuacUI.Client.isMenuShown());
+                }
+
+                // Detect if no keys are pressed
+                var reset_gesture = true;
+                for (var pressed in keyboard.pressed) {
+                    reset_gesture = false;
+                    break;
+                }
+
+                // Reset gesture state if possible
+                if (reset_gesture)
+                    show_keyboard_gesture_possible = true;
+
+                // Send key event
+                return __send_key(0, keysym);
+
+            };
+
+            /**
+             * Returns the contents of the remote clipboard if clipboard integration is
+             * enabled, and null otherwise.
+             */
+            function get_clipboard_data() {
+
+                //// If integration not enabled, do not attempt retrieval
+                //if (GuacUI.Client.clipboard_integration_enabled === false)
+                //    return null;
+
+                //// Otherwise, attempt retrieval and update integration status
+                //try {
+                //    var data = GuacamoleService.Clipboard.get();
+                //    GuacUI.Client.clipboard_integration_enabled = true;
+                //    return data;
+                //}
+                //catch (status) {
+                //    GuacUI.Client.clipboard_integration_enabled = false;
+                //    return null;
+                //}
+                return null;
+            }
+
+            // Set local clipboard contents on cut 
+            document.body.addEventListener("cut", function handle_cut(e) {
+                var data = get_clipboard_data();
+                if (data !== null) {
+                    e.preventDefault();
+                    e.clipboardData.setData("text/plain", data);
+                }
+            }, false);
+
+            // Set local clipboard contents on copy 
+            document.body.addEventListener("copy", function handle_copy(e) {
+                var data = get_clipboard_data();
+                if (data !== null) {
+                    e.preventDefault();
+                    e.clipboardData.setData("text/plain", data);
+                }
+            }, false);
+
+            // Set remote clipboard contents on paste
+            document.body.addEventListener("paste", function handle_paste(e) {
+
+                //// If status of clipboard integration is unknown, attempt to define it
+                //if (GuacUI.Client.clipboard_integration_enabled === undefined)
+                //    get_clipboard_data();
+
+                //// Override and handle paste only if integration is enabled
+                //if (GuacUI.Client.clipboard_integration_enabled) {
+                //    e.preventDefault();
+                //    GuacUI.Client.setClipboard(e.clipboardData.getData("text/plain"));
+                //}
+
+            }, false);
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            // Page logic
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            ////connect with server id
+            //guac.connect({
+            //    id: 42,
+            //    audio: GuacR.Audio.supported,
+            //    video: GuacR.Video.supported
+            //});
+            var btns = $(".guac-start[data-id]");
+            btns.click(function (e) {
+                btns.attr("disabled", "disabled");
+                var id = $(this).data("id");
+                guac.connect({
+                    id: id,
+                    audio: GuacR.Audio.supported,
+                    video: GuacR.Video.supported
+                });
+            })
+        });
+    </script>
+}
